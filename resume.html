@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Marlis Vignon — Resume</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body class="page-resume">
+  <!-- Shared Header / Nav -->
+  <header class="site-header">
+    <div class="container header-row">
+      <h1 class="logo"><a href="index.html">Marlis</a></h1>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a class="active" href="resume.html">Resume</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero / Title -->
+  <section class="section hero hero-slim">
+    <div class="container">
+      <h2 class="headline">Resume</h2>
+      <p class="subhead">A concise snapshot of my skills, experience, and education.</p>
+
+      <div class="cta-row">
+        <a class="button" href="Resume.pdf" download>⬇ Download PDF</a>
+        <a class="button button-ghost" href="https://github.com/MKVmais" target="_blank" rel="noopener">GitHub Profile</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resume Viewer Card -->
+  <section class="section">
+    <div class="container">
+      <div class="card resume-card">
+        <!-- If the PDF fails to load, the fallback message + link still appears -->
+        <embed
+          src="Resume.pdf#view=FitH"
+          type="application/pdf"
+          class="resume-embed"
+        />
+        <p class="embed-fallback">
+          Can’t view the PDF? <a href="Resume.pdf" target="_blank" rel="noopener">Open it in a new tab</a>.
+        </p>
+      </div>
+
+      <!-- Optional quick highlights for SEO/skim readers -->
+      <div class="grid two">
+        <div class="card">
+          <h3>Core Skills</h3>
+          <ul class="list">
+            <li>Web Dev: HTML, CSS, JS</li>
+            <li>Cybersecurity fundamentals</li>
+            <li>Networking: VLANs, Routing (Packet Tracer)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Credentials</h3>
+          <ul class="list">
+            <li>Computer Technology — Bowie State</li>
+            <li>USDA FNS Internship (QA/Automation)</li>
+            <li>Section 508 & STIG alignment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Back to top -->
+  <footer class="site-footer">
+    <div class="container">
+      <a class="button button-ghost" href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <!-- Floating Joke Bot (uses your existing HTML/JS/CSS) -->
+  <div id="chatbot-container">
+    <button id="chat-toggle">🤖 Joke Bot</button>
+    <div id="chatbox" class="hidden">
+      <div id="chat-log"></div>
+      <input type="text" id="chat-input" placeholder="Say hi or ask for a joke..." />
+      <button id="send-btn">Send</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const chatToggle = document.getElementById("chat-toggle");
+      const chatbox = document.getElementById("chatbox");
+      const sendBtn = document.getElementById("send-btn");
+      const chatInput = document.getElementById("chat-input");
+      const chatLog = document.getElementById("chat-log");
+
+      const jokes = [
+        "Why don’t programmers like nature? Too many bugs. 🐛",
+        "Why do Java developers wear glasses? Because they don’t see sharp. 🤓",
+        "Why did the computer go to therapy? It had too many tabs open. 💻",
+        "I would tell you a UDP joke… but you might not get it. 📡",
+        "Why was the JavaScript developer sad? Because they didn’t ‘null’ their feelings. 😢"
+      ];
+
+      chatToggle.addEventListener("click", () => {
+        chatbox.classList.toggle("hidden");
+      });
+
+      sendBtn.addEventListener("click", () => {
+        const userInput = chatInput.value.toLowerCase();
+        addMessage("You: " + chatInput.value);
+
+        if (userInput.includes("joke")) {
+          const joke = jokes[Math.floor(Math.random() * jokes.length)];
+          addMessage("Bot: " + joke);
+        } else if (userInput.includes("hello") || userInput.includes("hi")) {
+          addMessage("Bot: Hey there! Want to hear a joke? Type 'joke'.");
+        } else if (userInput.includes("bye")) {
+          addMessage("Bot: Bye! Don’t forget to laugh today 😁");
+        } else {
+          addMessage("Bot: I only know jokes right now! Try typing 'joke'.");
+        }
+
+        chatInput.value = "";
+      });
+
+      function addMessage(msg) {
+        const p = document.createElement("p");
+        p.textContent = msg;
+        chatLog.appendChild(p);
+        chatLog.scrollTop = chatLog.scrollHeight;
+      }
+    });
+  </script>
+</body>
+</html>
